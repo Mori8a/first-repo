@@ -1,114 +1,64 @@
- function createNameDiv(firstName, lastName) {
-     let main = document.createElement("main");
+let timeoutId;
 
-      let firstParagraph = document.createElement("p");
-     let firstName = document.createText(firstName);
-      firstParagraph.appendChild(firstName);
+function ColorChange() {
+    let colorChangeBtn = document.getElementsByClassName('colorChangeBtn');
+    colorChangeBtn.disabled = true; 
 
-      let secondParagraph = document.createElement("p");
-      let lastName = document.createText(lastName);
-     secondParagraph.appendChild(lastName);
+    timeoutId = setTimeout(changeColor, 2000);
+}
 
-      main.appendChild(firstParagraph);
-    main.appendChild(secondParagraph);
+function changeColor() {
+    let colorChangeBtn = document.getElementsByClassName('colorChangeBtn');
+    colorChangeBtn.disabled = false; 
+}
 
-     document.body.appendChild(main);
-  }
+function cancelColorChange() {
+    let colorChangeBtn = document.getElementsByClassName('colorChangeBtn');
+    clearTimeout(timeoutId);
+    colorChangeBtn.disabled = false;
+}
 
 
+let timeInSeconds = 20;
 
+
+function updateTimer() {
+  let timer = document.getElementById('timer');
+  timer.textContent = timeInSeconds;
 
   
-let products = [
-    { name: "Product 1", description: "coffe", price: 200 },
-    { name: "Product 2", description: "tea", price: 40 },
-    { name: "Product 3", description: "capsules", price: 130 },
-    { name: "Product 4", description: "tea leaves", price: 25 },
-    ];
+  if (timeInSeconds <= 0) {
+    timer.textContent = "Time is up!";
+    return;
+  }
+
+  
+  timeInSeconds--;
+
+  
+  setTimeout(updateTimer, 1000);
+}
 
 
-    class Travel {
-        constructor(name, date, kilometers) {
-            this.name = name;
-            this.date = date;
-            this.kilometers = kilometers;
-        }
+updateTimer();
+
+function customIndexOf(str, target) {
+    if (typeof str !== "string" || typeof target !== "string") {
+      throw new Error("One of them is not a string");
     }
-
-    let Travel1 = new Travel('avis', '12.5.2014', 30000);
-    let Travel2 = new Travel('eldan', '19.6.2022', 25900);
-    let Travel3 = new Travel('hertz', '23.9.2024', 78500);
-
-    
-    function printKilometers(car) {
-        console.log(`The number is ${car.kilometers}`);
+  
+    for (let i = 0; i < str.length; i++) {
+      if (str[i] === target) {
+        return i;
+      }
     }
-    
-    class Car {
-        constructor(companyName, modelName) {
-            this.companyName = companyName;
-            this.modelName = modelName;
-            this.isAvailable = true;
-            this.kilometers = 0;
-            this.Travel = [];
-        }
-    
-        sumFor() {
-            let sum = 0;
-            for (let i = 0; i < this.Travel.length; i++) {
-                sum += this.Travel[i].kilometers;
-            }
-            this.kilometers = sum;
-        }
-    }
-    
+    return -1;
+  }
+  
+  try {
+    console.log(customIndexOf(2536, 5));
+  } catch (error) {
+    console.error(error.message);
+  }
 
-    
-    let car = new Car('Toyota', 'Corolla');
-    car.Travel.push(Travel1, Travel2, Travel3);
-    
-    car.sumFor();
-    printKilometers(car);
-    
-    function addTravel(Travel) {
-        this.kilometers += Travel.kilometers;
-    }
-    
-    console.log(car.kilometers)
-    
-    class AllVehicles {
-        constructor(rentalCompanyName) {
-            this.rentalCompanyName = rentalCompanyName;
-            this.car = [];
-        }
-    
-        addCar(car) {
-            this.car.push(car);
-        }
-    }
-    
-    let allVehicles = new AllVehicles();
-    allVehicles.addCar(car);
-    
-    console.log(allVehicles.car);
-
-    
-     maxCar() {
-        let max=this.allVehicles[0]
-        this.allVehicles.array.forEach(element => {
-            if(max.kilometers < val.kilometers){
-                max = element
-            }
-        })
-        return max
-        }
-   
-    
-            
-        availableCar(){
-            this.isAvailable.forEach(value=>{
-                if(val.isAvailable == true) console.log(value)
-            });
-        }
-    
- 
+  
